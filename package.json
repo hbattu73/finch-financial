@@ -1,0 +1,26 @@
+{
+  "name": "finch-financial",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Internal operations console for a fictional neobank. Built for a Spec-Driven Development (SDD) workshop.",
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "scripts": {
+    "setup": "npm install && node scripts/ensure-env.mjs && npm run db:migrate -w api && npm run seed -w api",
+    "predev": "node scripts/check-deps.mjs",
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "npm run dev -w api",
+    "dev:web": "npm run dev -w web",
+    "test": "npm run test --workspaces",
+    "seed": "npm run seed -w api"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "concurrently": "^10.0.4"
+  }
+}

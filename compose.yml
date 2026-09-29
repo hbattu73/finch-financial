@@ -1,0 +1,40 @@
+# Optional full-stack container run. The primary path is containerless:
+#     npm run setup && npm run dev
+# SQLite means there is no database service — the DB is a file inside the api volume.
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Containerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: /data/finch.db
+      PORT: 3000
+      NODE_ENV: development
+      CORS_ORIGIN: http://localhost:5173
+      JWT_SECRET: workshop-dev-secret-change-in-production
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+      - api_data:/data
+    command: sh -c "npm run db:migrate && npm run seed && npm run dev"
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Containerfile
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:3000
+      NODE_ENV: development
+    depends_on:
+      - api
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    command: npm run dev
+
+volumes:
+  api_data:

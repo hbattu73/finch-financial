@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+
+# Misc
+.tmp/
+
+# Bob
+.bob/.bob-errors/
+.bob/notes/
+.bob/notes/pending-notes.txt
+
+# Internal Docs
+docs/__internal__/

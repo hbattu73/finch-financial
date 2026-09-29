@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sidebar-bg: #14171f;
+  --font-sans: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+}
