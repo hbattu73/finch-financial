@@ -32,7 +32,7 @@ Two features are available as workshop exercises. Pick one.
 
 **1. Freeze and unfreeze customer accounts when suspicious activity is detected.**
 
-> **User story:** An ops analyst notices Big Bread Bakery has 15 suspicious cash deposits just under $10,000. They can't freeze the account themselves as that requires a supervisor. They flag it to their supervisor, who logs in and freezes the account with a reason.
+> **User story:** An ops analyst notices Northgate Properties just sent a $280,000 wire to Cayman Holdings Ltd, with no prior history of transfers anywhere near that size. They can't freeze the account themselves as that requires a supervisor. They flag it to their supervisor, who logs in and freezes the account with a reason.
 
 
 **2. Flag suspicious transactions for follow-up review, with a supervisor resolution workflow.**
