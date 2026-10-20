@@ -4,77 +4,89 @@
 
 ---
 
-## Module 1 — Requirements
+## Module 1 — Requirements + Spec
 
 `[do]` Ask mode.
 
 ```
-I am building the Freeze and Seize product request from @product-requests.md to this app. Which files and endpoints would it touch? What existing features are most similar, and what is already here vs. missing? List the decisions that the code can't settle for me. Do not write a plan or code yet.
+I'm adding the Freeze and Seize feature from @product-requests.md and I'm new to this codebase. Use three explore subagents in parallel and give me only their summaries:
+1. The most similar existing feature, traced from the API call down to the database and its tests. Just the files, in order.
+2. Rules the code enforces when an account's status or balance changes. One line each, with the file.
+3. Existing parts of the app this feature would touch. As a table.
+Don't plan or write code yet.
 ```
 
 ```
-What does this repo already give me to verify a change against? Any type systems or test setups? Help me turn the expected outcomes into validation criteria that are measurable and testable.
+What does this repo already give me to verify a change against? Then turn the expected outcomes in the product request into validation criteria, one per outcome, each with a pass condition.
 ```
 
-`[do]` Agent mode.
+```
+What open questions require my input that you can't settle from the code alone?
+```
+
+`[do]` Plan mode.
 
 ```
 Write a `requirements.md` from this conversation, using the task and the validation criteria we just defined, the relevant files, and the open questions we had defined. Output a requirements artifact only. No plan or code yet.
-
-Guidance:
 ```
 
-Type the guidance live — one or two lines, pointing at an existing pattern to copy
-and naming a concrete expected outcome. This is the part the agent can't derive.
+```
+Interview me about the open questions in @requirements.md.
+```
+
+Answer one question at a time. Accept or override the proposed default. Confirm the assumptions when asked.
+
+```
+Using @requirements.md, draft a `spec.md`. Include the phases in dependency order, each naming the criteria it satisfies and how to check them. Every validation criterion must trace to a phase. No vague steps like "implement X", say what changes and where. Group changes into phases that can each be checked on their own; no phase without changes.
+```
+
+Optional, if time allows:
+
+```
+Have a fresh explore subagent check @spec.md against @requirements.md: every criterion in a phase, no vague steps, nothing the requirements didn't ask for. Apply what it finds.
+```
 
 ---
 
-## Module 2 — Spec
+## Module 2 — Implementation
+
+`[do]` New session. Agent mode. Auto-approve reads, edits, and commands.
 
 ```
-Using @requirements.md, draft an implementation plan. First, interview me about the decisions @requirements.md leaves open, waiting for my answer each time. When they are settled, confirm with me before you draft. Then, draft a plan covering: task summary, agreed/rejected decisions, and phases in dependency order. Every validation criterion must trace to a phase. No vague steps like "implement X" — say what changes and where. Don't write code or to a file yet.
-```
-
-```
-Review that draft against @requirements.md. Check that every validation criterion can be traced to a phase and that there are no vague steps. Is there anything in there that I never asked for? Give each phase its own validation step. Apply any refinements and save it to `spec.md`. Keep it minimal, don't pad.
-```
-
----
-
-## Module 3 — Implementation
-
-`[do]` New session. Agent mode. Auto-accept edits.
-
-```
-Implement @spec.md. Work through the phases in order. After each phase, run the checks for it and tell me what passed before starting the next one. If the spec doesn't settle something, stop and ask instead of guessing.
-```
-
-```
-Show me the test names that you added and which validation criterion in @requirements.md each one covers. Don't paste the test bodies.
+Implement @spec.md phase by phase. Run each phase's checks and report before moving to the next.
 ```
 
 If it drifts:
 
 ```
-Phase 3 was supposed to X. It did Y. Fix it to match the spec — don't change the spec.
+Phase N was supposed to X. It did Y. Fix it to match the spec — don't change the spec.
 ```
 
-`[do]` If it derails: `git restore .`
+`[do]` If it derails: `git restore .` and run the prompt again.
 
 ---
 
-## Module 4 — Verification
+## Module 3 — Validation
 
-`[do]` `git diff --stat`, then read one file yourself.
+`[do]` `git diff --stat main`, then read one file yourself.
 
-```
-Review the diff against @spec.md and @requirements.md. Flag anything incomplete, inconsistent, or risky. Give me a couple that matter the most. Justify your reasoning. Don't fix anything.
-```
+`[do]` `/review` → compare against `main` → Include Uncommitted Changes → Start. Read the findings. Don't click "Fix with Bob."
 
-```
-For each one, say whether it's structural (e.g. approach was wrong), content (e.g. over-engineered or inconsistent), or just plainly inelegant. Mark the ones you can't settle without a human.
-```
+`[do]` New session. Ask mode.
 
 ```
-Which validation criteria in @requirements.md §4 have no automated test covering them? Just the list.
+Review the diff against @spec.md and @requirements.md: does the code match the spec, is it safe for a regulated fintech app, and would the tests fail if a requirement were broken? Skip what matches. Report what matters and mark which findings need a human decision.
+```
+
+`[do]` Human gate:
+1. What did `/review` find that the validator didn't, and the reverse?
+2. Of the human-decision findings, which blocks shipping at your organization?
+3. Would this ship, and who signs?
+
+Optional, to close the loop once:
+
+`[do]` Add the agreed fix to the relevant phase in `spec.md`. Agent mode.
+
+```
+Phase N of @spec.md changed. Re-implement that phase and run its checks.
 ```
