@@ -102,18 +102,11 @@ accountsRouter.post(
     currentUser,
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { body } = req.body as { body?: string }
-            if (!body) {
-                res.status(400).json({
-                    error: 'VALIDATION_ERROR',
-                    message: 'body is required'
-                })
-                return
-            }
+            const { body } = req.body as { body?: unknown }
             const memo = await accountsService.addMemo(
                 req.user!,
                 req.params['id'] as string,
-                body
+                typeof body === 'string' ? body : ''
             )
             res.status(201).json({ data: memo })
         } catch (err) {
