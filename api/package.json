@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts || true",
     "build": "tsc",
-    "test": "vitest",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "seed": "tsx seed/index.ts",
     "db:generate": "drizzle-kit generate",

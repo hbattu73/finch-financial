@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import type { Account, Transaction, Memo } from '@shared/types'
-import { getAccount, getTransactions, getMemos, createMemo } from '../api'
+import { getAccount, getTransactions, getMemos, createMemo, getMe, ApiError } from '../api'
 import DataTable from '../components/DataTable'
 import ActivityFeed from '../components/ActivityFeed'
-import { ApiError } from '../api'
 
 type Tab = 'transactions' | 'memos' | 'audit log'
 
@@ -63,14 +62,9 @@ const AccountDetail = () => {
     }, [id])
 
     useEffect(() => {
-        // check current user role from the session cookie via Layout's user state
-        // we infer supervisor status from whether memos can be added
-        // this is set after first memo attempt or by checking /api/me
-        import('../api').then(({ getMe }) => {
-            getMe()
-                .then(res => setIsSupervisor(res.data.role === 'supervisor'))
-                .catch(() => setIsSupervisor(false))
-        })
+        getMe()
+            .then(res => setIsSupervisor(res.data.role === 'supervisor'))
+            .catch(() => setIsSupervisor(false))
     }, [])
 
     const handleAddMemo = async (e: React.FormEvent) => {

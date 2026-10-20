@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Guidance for coding agents working in this repository. Read this before making changes.
+Guidance for coding agents working in this repository.
 
 ## What this is
 
@@ -17,13 +17,12 @@ explicit over being clever or fast.
   deliverables. If asked for requirements, do not write a plan. If asked for a plan, do
   not write code.
 - **Run the relevant checks before saying you are done** — `npm test -w api` or
-  `npm test -w web`, and `npm run typecheck -w api`.
-- **Surface ambiguity as a question.** If a requirement does not determine a decision
-  (validation rules, which status codes apply, what to store where), ask rather than
-  choosing silently.
+  `npm test -w web`, and `npm run typecheck -w api` or `npm run typecheck -w web`.
+- **Ask only when it matters; default the rest.** Ask when a decision changes scope,
+  user-visible behavior, or the data model. Otherwise decide it the way the existing
+  pattern does and state the assumption.
 - **Stay in scope.** Do not refactor unrelated code, and do not modify authentication.
-- **Do not commit or push** unless asked. Leaving the working tree uncommitted is what
-  lets a change be reviewed or reset.
+- **Do not commit or push** unless asked.
 
 ## Keep the thread readable
 
@@ -34,18 +33,17 @@ essay, and not a bare wall of tool calls and file reads.
 - Say in one line what you are about to do before a batch of edits.
 - After changing something, state what changed and the outcome in a sentence or two —
   including the test result.
-- Ask when a decision is genuinely ambiguous.
 - Call out anything surprising you found, briefly.
 - Close multi-phase work with a short summary of what each phase changed.
 
 **Don't:**
 - Restate the request back before starting.
-- Print file contents the diff already shows.
-- Explain the code you just wrote line by line unless asked.
-- Recap work already visible after every individual step.
+- Explain or recap what the diff already shows.
 - Offer alternatives unless asked to compare options.
 
 Rule of thumb: a few sentences per step, not paragraphs.
+
+Exploration summaries: name files, one line per item, skip what needs no change.
 
 ## Architecture
 

@@ -55,12 +55,12 @@ const ActivityFeed = ({ accountId }: Props) => {
                 <span className="text-xs text-gray-400 capitalize">· {entry.actorRole}</span>
               </div>
               <p className="text-sm text-gray-300 mt-0.5">{getAuditLabel(entry.action)}</p>
-              {entry.payload['body'] && (
+              {typeof entry.payload['body'] === 'string' && (
                 <p className="text-xs text-gray-400 mt-0.5 font-mono">
                   "{String(entry.payload['body'])}"
                 </p>
               )}
-              {entry.payload['reason'] && (
+              {typeof entry.payload['reason'] === 'string' && (
                 <p className="text-xs text-gray-400 mt-0.5">
                   Reason: {String(entry.payload['reason'])}
                 </p>
