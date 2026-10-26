@@ -45,6 +45,8 @@ Rule of thumb: a few sentences per step, not paragraphs.
 
 Exploration summaries: name files, one line per item, skip what needs no change.
 
+Reviews: report only confirmed findings, one line each with the file and the requirement or phase it concerns. Leave out what checks out, and don't narrate what you verified.
+
 ## Architecture
 
 A single HTTP boundary separates the React frontend from the Express backend. The backend
