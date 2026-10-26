@@ -1,6 +1,6 @@
 # Product Requests
 
-## 1. Freeze and Seize
+## 1. Freeze and Unfreeze
 
 The ops team needs the ability to freeze and unfreeze customer accounts when suspicious activity is detected. You may notice that some accounts in the system are already marked as **FROZEN**, but there is currently no way to freeze or unfreeze an account through the app. The data model supports the status, but the workflow to change it does *not* exist yet.
 

@@ -9,7 +9,7 @@
 `[do]` Ask mode.
 
 ```
-I'm adding the Freeze and Seize feature from @product-requests.md and I'm new to this codebase. Use three explore subagents in parallel and give me only their summaries:
+I'm adding the Freeze and Unfreeze feature from @product-requests.md and I'm new to this codebase. Use three explore subagents in parallel and give me only their summaries:
 1. The most similar existing feature, traced from the API call down to the database and its tests. Just the files, in order.
 2. Rules the code enforces when an account's status or balance changes. One line each, with the file.
 3. Existing parts of the app this feature would touch. As a table.

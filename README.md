@@ -1,4 +1,4 @@
-# Finch Financial (WIP)
+# Finch Financial
 
 ## Premise
 
